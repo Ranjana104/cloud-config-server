@@ -1,0 +1,421 @@
+COMPANY_CODE =:APP_COMAPNY_CODE,
+BRANCH_CODE =:APP_BRANCH_CODE,
+EMP_CODE =:EMP_CODE,
+EMP_NAME =:EMP_NAME,
+DESIGNATION_CODE =:DESIGNATION_CODE,
+GRADE_CODE =:GRADE_CODE,
+DEPT_CODE =:DEPT_CODE,
+COST_CODE =:COST_CODE,
+CATEGORY_CODE =:CATEGORY_CODE,
+MACHINE_CODE =:MACHINE_CODE,
+CENTRE_CODE =:CENTRE_CODE,
+TECH_NONTECH =:TECH_NONTECH,
+PF_NO =:PF_NO,
+ESI_NO =:ESI_NO,
+PASSPORT_NO =:PASSPORT_NO,
+PASSPORT_VALID_DT =:PASSPORT_VALID_DT,
+R_EMP_CODE =:R_EMP_CODE,
+DATE_OF_JOIN =:DATE_OF_JOIN,
+DATE_OF_CONFIRM =:DATE_OF_CONFIRM,
+DATE_OF_BIRTH =:DATE_OF_BIRTH,
+DATE_OF_MARRIAGE =:DATE_OF_MARRIAGE,
+FATHER_HUSBAND_NAME =:FATHER_HUSBAND_NAME,
+NATIVE =:NATIVE,
+RELIGION =:RELIGION,
+SEX =:SEX,
+BLOOD_GROUP =:BLOOD_GROUP,
+IDENTIFICATION_MARK1 =:IDENTIFICATION_MARK1,
+IDENTIFICATION_MARK2 =:IDENTIFICATION_MARK2,
+MARITAL_CODE =:MARITAL_CODE,
+SPOUSE_NAME =:SPOUSE_NAME,
+VEHICLE_NAME =:VEHICLE_NAME,
+VEH_REG_NO =:VEH_REG_NO,
+SHOE_SIZE =:SHOE_SIZE,
+STATUS_CODE =:STATUS_CODE,
+STATUS_DATE =:STATUS_DATE,
+CURRENT_DESIGNATION =:CURRENT_DESIGNATION,
+CURRENT_BASIC =:CURRENT_BASIC,
+INCREMENT_DATE =:INCREMENT_DATE,
+USR_ID_C =:USR_ID_C,
+LAST_MODT_DT =:LAST_MODT_DT,
+DISPENSERY =:DISPENSERY,
+LOCATION_CODE =:LOCATION_CODE,
+VEG_NONVEG =:VEG_NONVEG,
+DATE_OF_TRAINING =:DATE_OF_TRAINING,
+DATE_OF_PROBATION =:DATE_OF_PROBATION,
+LIC_GROUP_NO =:LIC_GROUP_NO,
+LIC_GRATUITY_NO =:LIC_GRATUITY_NO,
+RSN_FOR_LV_SRVC =:RSN_FOR_LV_SRVC,
+SALES_REP_FLAG =:SALES_REP_FLAG,
+UAN =:UAN,
+
+insert into PR_DEPENDENT_CODE_MASTER( COMPANY_CODE, BRANCH_CODE, EMP_CODE, EMP_NAME, DESIGNATION_CODE, GRADE_CODE, DEPT_CODE, COST_CODE, CATEGORY_CODE, MACHINE_CODE, CENTRE_CODE, TECH_NONTECH,
+ PF_NO0, ESI_NO, PASSPORT_NO, PASSPORT_VALID_DT, R_EMP_CODE, DATE_OF_JOIN, DATE_OF_CONFIRM, DATE_OF_BIRTH, DATE_OF_MARRIAGE, FATHER_HUSBAND_NAME, NATIVE, RELIGION, SEX, BLOOD_GROUP, 
+IDENTIFICATION_MARK1, IDENTIFICATION_MARK2, MARITAL_CODE, SPOUSE_NAME, VEHICLE_NAME, VEH_REG_NO, SHOE_SIZE, STATUS_CODE, STATUS_DATE, CURRENT_DESIGNATION, CURRENT_BASIC, INCREMENT_DATE, DISPENSERY, 
+LOCATION_CODE, VEG_NONVEG, DATE_OF_TRAINING, DATE_OF_PROBATION, LIC_GROUP_NO, LIC_GRATUITY_NO, RSN_FOR_LV_SRVC, SALES_REP_FLAG, UAN, USR_ID_C, LAST_MODT_DT, DEL_FLAG)
+            values( :COMPANY_CODE, :BRANCH_CODE, :EMP_CODE, :EMP_NAME, :DESIGNATION_CODE, :GRADE_CODE, :DEPT_CODE, :COST_CODE, :CATEGORY_CODE, :MACHINE_CODE, :CENTRE_CODE, :TECH_NONTECH,
+ :PF_NO0, :ESI_NO, :PASSPORT_NO, :PASSPORT_VALID_DT, :R_EMP_CODE, :DATE_OF_JOIN, :DATE_OF_CONFIRM, :DATE_OF_BIRTH, :DATE_OF_MARRIAGE, :FATHER_HUSBAND_NAME, :NATIVE, :RELIGION, :SEX, :BLOOD_GROUP, 
+:IDENTIFICATION_MARK1, :IDENTIFICATION_MARK2, :MARITAL_CODE, :SPOUSE_NAME, :VEHICLE_NAME, :VEH_REG_NO, :SHOE_SIZE, :STATUS_CODE, :STATUS_DATE, :CURRENT_DESIGNATION, :CURRENT_BASIC, :INCREMENT_DATE, :DISPENSERY, 
+:LOCATION_CODE, :VEG_NONVEG, :DATE_OF_TRAINING, :DATE_OF_PROBATION, :LIC_GROUP_NO, :LIC_GRATUITY_NO, :RSN_FOR_LV_SRVC, :SALES_REP_FLAG, :UAN, :APP_USER, SYSDATE, 'A')
+
+declare
+    l_win_tcid VARCHAR2 (4000);
+    l_ru_tcid VARCHAR2 (4000);
+begin
+    -- reset the variables for each pass through this process
+    l_win_tcid := null;
+    l_ru_tcid := null;
+     
+    if :APEX$ROW_STATUS = 'D' then
+        -- DELETE the record
+        UPDATE PR_EMP_MST
+        SET DEL_FLAG = 'I'
+        where EMP_CODE = :EMP_CODE;
+         
+    else
+ 
+        -- As we're either doing an UPDATE or an INSERT, we need to find the 
+        -- CID value for each of the team names ( if specified)
+ 
+         
+        if :APEX$ROW_STATUS = 'U' then
+            -- UPDATE the record
+            -- Note that, although DATE_PLAYED is a DATE field, the bind variable
+            -- contains a string so we need to handle the conversion to a date here
+            update PR_EMP_MST
+            set EMP_CODE =:EMP_CODE,
+            COMPANY_CODE =:APP_COMAPNY_CODE,
+            BRANCH_CODE =:APP_BRANCH_CODE,
+            EMP_NAME =:EMP_NAME,
+            DESIGNATION_CODE =:DESIGNATION_CODE,
+            GRADE_CODE =:GRADE_CODE,
+            DEPT_CODE =:DEPT_CODE,
+            COST_CODE =:COST_CODE,
+            CATEGORY_CODE =:CATEGORY_CODE,
+            MACHINE_CODE =:MACHINE_CODE,
+            CENTRE_CODE =:CENTRE_CODE,
+            TECH_NONTECH =:TECH_NONTECH,
+            PF_NO =:PF_NO,
+            ESI_NO =:ESI_NO,
+            PASSPORT_NO =:PASSPORT_NO,
+            PASSPORT_VALID_DT =:PASSPORT_VALID_DT,
+            R_EMP_CODE =:R_EMP_CODE,
+            DATE_OF_JOIN =:DATE_OF_JOIN,
+            DATE_OF_CONFIRM =:DATE_OF_CONFIRM,
+            DATE_OF_BIRTH =:DATE_OF_BIRTH,
+            DATE_OF_MARRIAGE =:DATE_OF_MARRIAGE,
+            FATHER_HUSBAND_NAME =:FATHER_HUSBAND_NAME,
+            NATIVE =:NATIVE,
+            RELIGION =:RELIGION,
+            SEX =:SEX,
+            BLOOD_GROUP =:BLOOD_GROUP,
+            IDENTIFICATION_MARK1 =:IDENTIFICATION_MARK1,
+            IDENTIFICATION_MARK2 =:IDENTIFICATION_MARK2,
+            MARITAL_CODE =:MARITAL_CODE,
+            SPOUSE_NAME =:SPOUSE_NAME,
+            VEHICLE_NAME =:VEHICLE_NAME,
+            VEH_REG_NO =:VEH_REG_NO,
+            SHOE_SIZE =:SHOE_SIZE,
+            STATUS_CODE =:STATUS_CODE,
+            STATUS_DATE =:STATUS_DATE,
+            CURRENT_DESIGNATION =:CURRENT_DESIGNATION,
+            CURRENT_BASIC =:CURRENT_BASIC,
+            INCREMENT_DATE =:INCREMENT_DATE,
+            USR_ID_C =:USR_ID_C,
+            LAST_MODT_DT =:LAST_MODT_DT,
+            DISPENSERY =:DISPENSERY,
+            LOCATION_CODE =:LOCATION_CODE,
+            VEG_NONVEG =:VEG_NONVEG,
+            DATE_OF_TRAINING =:DATE_OF_TRAINING,
+            DATE_OF_PROBATION =:DATE_OF_PROBATION,
+            LIC_GROUP_NO =:LIC_GROUP_NO,
+            LIC_GRATUITY_NO =:LIC_GRATUITY_NO,
+            RSN_FOR_LV_SRVC =:RSN_FOR_LV_SRVC,
+            SALES_REP_FLAG =:SALES_REP_FLAG,
+            UAN =:UAN,
+            where EMP_CODE = :EMP_CODE;
+         
+        elsif :APEX$ROW_STATUS = 'C' then
+            -- CREATE (INSERT) as new record
+            -- We need to return the Primary Key of the new record as APEX will
+            -- use it to refresh the IG display and show the newly created row
+            insert into PR_EMP_MST( COMPANY_CODE, BRANCH_CODE, EMP_CODE, EMP_NAME, DESIGNATION_CODE, GRADE_CODE, DEPT_CODE, COST_CODE, CATEGORY_CODE, MACHINE_CODE, CENTRE_CODE, TECH_NONTECH,
+ PF_NO0, ESI_NO, PASSPORT_NO, PASSPORT_VALID_DT, R_EMP_CODE, DATE_OF_JOIN, DATE_OF_CONFIRM, DATE_OF_BIRTH, DATE_OF_MARRIAGE, FATHER_HUSBAND_NAME, NATIVE, RELIGION, SEX, BLOOD_GROUP, 
+IDENTIFICATION_MARK1, IDENTIFICATION_MARK2, MARITAL_CODE, SPOUSE_NAME, VEHICLE_NAME, VEH_REG_NO, SHOE_SIZE, STATUS_CODE, STATUS_DATE, CURRENT_DESIGNATION, CURRENT_BASIC, INCREMENT_DATE, DISPENSERY, 
+LOCATION_CODE, VEG_NONVEG, DATE_OF_TRAINING, DATE_OF_PROBATION, LIC_GROUP_NO, LIC_GRATUITY_NO, RSN_FOR_LV_SRVC, SALES_REP_FLAG, UAN, USR_ID_C, LAST_MODT_DT, DEL_FLAG)
+            values( :COMPANY_CODE, :BRANCH_CODE, :EMP_CODE, :EMP_NAME, :DESIGNATION_CODE, :GRADE_CODE, :DEPT_CODE, :COST_CODE, :CATEGORY_CODE, :MACHINE_CODE, :CENTRE_CODE, :TECH_NONTECH,
+ :PF_NO0, :ESI_NO, :PASSPORT_NO, :PASSPORT_VALID_DT, :R_EMP_CODE, :DATE_OF_JOIN, :DATE_OF_CONFIRM, :DATE_OF_BIRTH, :DATE_OF_MARRIAGE, :FATHER_HUSBAND_NAME, :NATIVE, :RELIGION, :SEX, :BLOOD_GROUP, 
+:IDENTIFICATION_MARK1, :IDENTIFICATION_MARK2, :MARITAL_CODE, :SPOUSE_NAME, :VEHICLE_NAME, :VEH_REG_NO, :SHOE_SIZE, :STATUS_CODE, :STATUS_DATE, :CURRENT_DESIGNATION, :CURRENT_BASIC, :INCREMENT_DATE, :DISPENSERY, 
+:LOCATION_CODE, :VEG_NONVEG, :DATE_OF_TRAINING, :DATE_OF_PROBATION, :LIC_GROUP_NO, :LIC_GRATUITY_NO, :RSN_FOR_LV_SRVC, :SALES_REP_FLAG, :UAN, :APP_USER, SYSDATE, 'A')
+returning EMP_CODE into :EMP_CODE;
+        end if;
+    end if;
+end;
+
+
+-------------------------
+
+:EMP_CODE =:P80_EMPLOYEE_CODE
+
+declare
+l_count number;
+begin
+if  :APEX$ROW_STATUS ='C' then -- You can use 'C' OR 'I'
+select count(1) into l_count FROM PR_DEPENDENT_CODE_MASTER where DEPENDENT_CODE=:DEPENDENT_CODE;
+end if;
+if l_count>=1 then
+return 'DEPENDENT_CODE '||:DEPENDENT_CODE||' is duplicate';
+end if;
+end;
+
+-----------------------------------------------------
+
+LOV_PAY_YEAR  - select distinct PAY_YEAR  from pL_grade_ALLOWANCE
+where grade_code = :blk_code.code and del_flag = 'A'
+order by 1
+
+
+LOV_GRADE_CODE        - select grade,grade_code
+ from pr_grade_master
+where del_flag = 'A'
+order by 1 
+
+
+LOV_ED_CODE           - select description ,ed_code from pl_ed_master where del_flag = 'A'
+order by ear_ded_flag desc
+
+
+------------------------------------------------------------
+
+EMPLOYEE ALLOWANCE MONTHLY ENTRY
+
+select to_char(add_months(st_dt-1,rownum),'rrrrmm') yrmonth
+  from user_objects,
+       tb_cal_year_mst
+ where cal_year = to_char(trunc(sysdate),'YYYY') and rownum < 13
+order by 1            LOV_YR_MONTH
+
+
+
+:LOP_FLAG := case :LOP_FLAG when 'Y' then 'F' else 'N' end;
+
+=----------------------------------------------------
+.psp{
+    border:1px solid black !important;
+}
+
+.t-Region-headerItems--title 
+{  
+    display: block;  
+    text-align: center;
+    color: blue;
+    font-size: 35px;
+    }
+ .sps{
+        border: 1px solid black;
+        border-top: 0px;
+    }
+.xxx{
+    font-size: x-large;
+    color: brown;
+}.btn_color {
+    background-color: #d3d3d3 !important;
+}
+
+.clk
+{
+    border: 1px solid black;
+    background-color: #ffffff;
+}
+
+.t-Region-headerItems--title 
+{ 
+     display: block; 
+    text-align: center;
+    color: blue; 
+    font-size: 35px;
+ }
+ .csd{
+    border:1px solid black;
+}
+.ccc{
+    background-color: grey;
+}
+#MyStaticID{
+height: 320px
+}
+
+
+----------------------------------------------
+
+
+ <html>
+<head>
+<title>(Type a title for your page here)</title>
+<script type="text/javascript"> 
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+function checkTime(i) {
+        return (i < 10) ? "0" + i : i;
+    }
+function display_ct() {
+var x = new Date()
+var x1= checkTime(x.getDate())+ "-" +  x.toLocaleString('en-us',{month:'short'})+ "-" + x.getFullYear(); 
+x1 = x1 + " - " +  checkTime(x.getHours())+ ":" +  checkTime(x.getMinutes()) + ":" +  checkTime(x.getSeconds());
+document.getElementById('ct').innerHTML = x1;
+display_c();
+ }
+</script>
+</head>
+
+<body onload=display_ct();>
+<b><span id='ct' ></span></b>
+
+</body>
+</html>
+
+-----------------------------------------------------------------
+
+PL_FM_BASISCODE_NORMS  
+
+select description,ed_code from pl_ed_master where del_flag = 'A' 
+order by 1   LOV_CODE
+
+select description,ed_code from pl_ed_master where del_flag = 'A' and ed_code <> :blk_code.code
+order by 1    LOV_ON_ED_CODE
+
+
+---------------------------------------------------------------------
+
+LOAN_MASTER   PL_FM_LOAN_MASTER
+ 
+select distinct loan_name ,loan_code from pl_loan_master
+ where del_flag = 'A'
+order by 1   LOV-LOAN_CODE  
+
+select description,ed_code from pl_ed_master 
+where del_flag = 'A' and ear_ded_flag = 'D' order by 1   LOV_ED_CODE  
+
+----------------------------------------------------------------------
+MN_FM_PROCESS_TYPE_MST
+
+
+SELECT DESCRIPTION, TYPE_CODE FROM 
+MN_TB_PROCESS_TYPE_MST WHERE DEL_FLAG<> 'I'
+
+--------------------------------------------------------
+
+SL_FM_TERMS_CONDITION_MST    SL_TB_TERMS_MST
+
+SELECT ALL SL_TB_TERMS_MST.DESCRIPTION, SL_TB_TERMS_MST.TERMS_CDE FROM
+SL_TB_TERMS_MST WHERE DEL_FLAG<> 'I'    LOV_TERMS
+
+--------------------------------------------------------------
+
+SL_FM_DELI_TERM_MST    SL_TB_DEI_TERM_MST
+ 
+
+SELECT ALL SL_TB_DELI_TERM_MST_DESCRIPTION, SL_TB_DELI_TERM_MST.DELI_TERM_CDE
+FROM SL_TB_DELI_TERM_MST WHERE DEL_FLAG<> 'I'   LOV_DELI_TERMS
+
+--------------------------------------------------------------------------
+   
+FI_TB_BL_TYPE   FI_FM_BL_TYPE
+
+SELECT DESCRIPTION, BL_CODE FROM FI_TB_BL_TYPE
+WHERE DEL_FLAG = 'A'
+ORDER BY 1   LOV_BL_TYPE
+
+--------------------------------------------------------------------------------
+
+select gl_code, description 
+  from fi_tb_gl_master t
+ where del_flag= 'A'
+order by t.summary_code, t.gl_code   LOV_GLCODE
+
+select budgetgrp_cde,description from fi_tb_budgetgrp where del_flag='A'   LOV_BUDGETGRP_CDE
+
+--------------------------------------------------------------------------------------
+
+apex.message.set ThemeHooks({
+beforeShow: function(pMsgType, pElement$){
+setTimeout(function(){
+$('.t-alert').fadeOut('slow');
+}, 2000);
+}
+});
+
+---------------------------------------------------------------------------------------
+
+select to_char(sysdate, 'dd/mm/yyyy hh:mi:ss am') from  dual;
+
+select to_date(2456143,'J') from dual;
+
+select to_char(to_date(from_time,'J'), 'hh:mi:ss am') from TB_SHIFT_MASTER;
+---------------------------------------------------------------------------------------------
+
+select PROD_GRP_CDE, PROD_GRP_DESC from in_tb_prod_grp_mst where del_flag ='A' 
+
+------------------------------------------------------------------------------------------
+
+SELECT MONTH_CAPACITY, MONTH_VALUE,QTY_UOM,MAIN_GROUP,LOT_QTY,ASSY_DEPT_CODE,LINE_LOADING_GRP,INST_MTH_CAP_QTY, INST_MTH_CAP_VAL,CHAIN_LOT_QTY,CLASS_CODE,PROD_SEQ INTO 
+APP_MONTH_CAPACITY, APP_MONTH_VALUE,APP_QTY_UOM,APP_MAIN_GROUP,APP_LOT_QTY,APP_ASSY_DEPT_CODE,APP_LINE_LOADING_GRP,APP_INST_MTH_CAP_QTY, APP_INST_MTH_CAP_VAL,APP_CHAIN_LOT_QTY,APP_CLASS_CODE,APP_PROD_SEQ
+FROM IN_TB_PROD_GRP_MST WHERE ROWNUM <=1;
+
+----------------------------------------------------------------------------------------------
+apex.jQuery(function() {
+apex.theme42.util.configAPEXMsgs({
+autoDismiss: true,
+duration: 5000
+  });
+});
+---------------------------------------------------------------------------------------------------
+FOR ERROR MESSAGE DISAPPEAR
+
+apex.message.setThemeHooks({
+ beforeShow: function(pMsgType, pElement$){
+  setTimeout(function() {
+    pElement$.fadeOut('slow');
+   },5000);
+ }
+});
+apex.jQuery(function() {
+ apex.theme42.util.configAPEXMsgs({
+  autoDismiss: true,
+  duration: 5000
+ });
+});
+
+--------------------------------------------------------------------------------------------
+
+select description,tax_grp_code from fi_tb_tax_grp_mst
+where del_flag != 'I'
+order by 1  LOV_TAX_GROUP   FI_FM_TAX_GRP_MST  FI_TB_TAX_GRP_MST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
